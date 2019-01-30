@@ -7,6 +7,7 @@ if ! ps -p $PPID | grep -q java; then
   ZSH_TMUX_AUTOSTART=true
 fi
 
+# Install zplug if missing
 if [ ! -d ~/.zplug ]; then
           curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
 fi
@@ -19,6 +20,8 @@ zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/cp", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
 zplug "plugins/ssh-agent", from:oh-my-zsh
+zplug "plugins/pyenv", from:oh-my-zsh
+zplug "plugins/rbenv", from:oh-my-zsh
 zplug "zsh-users/zsh-syntax-highlighting", from:github
 zplug "zsh-users/zsh-history-substring-search", from:github
 zplug "zsh-users/zsh-completions", from:github
@@ -32,7 +35,6 @@ zplug load
 bindkey '\eOA' history-substring-search-up
 bindkey '\eOB' history-substring-search-down
 
-alias s=ssh
 
 #Homeshick
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
@@ -42,7 +44,12 @@ export ANDROID_HOME="$HOME/Android/Sdk"
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH=~/.npm-global/bin:$PATH
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [[ -f ~/.fzf.zsh ]]; then
+  source ~/.fzf.zsh
+else
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+fi
 
 # fd - cd to selected directory
 fd() {
@@ -52,14 +59,12 @@ fd() {
   cd "$dir"
 }
 
+# Aliases
+alias s=ssh
 alias umake=ubuntu-make.umake 
-
-export PATH="/home/tetien850/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
 
 # added by travis gem
 [ -f /home/tetien850/.travis/travis.sh ] && source /home/tetien850/.travis/travis.sh
+
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
