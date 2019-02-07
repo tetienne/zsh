@@ -9,7 +9,7 @@ fi
 
 # Install zplug if missing
 if [ ! -d ~/.zplug ]; then
-          curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
 fi
 
 source ~/.zplug/init.zsh
@@ -29,7 +29,6 @@ zplug "zsh-users/zsh-autosuggestions", from:github
 zplug "zplug/zplug", hook-build:'zplug --self-manage'
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 zplug load
 
 bindkey '\eOA' history-substring-search-up
