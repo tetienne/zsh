@@ -7,29 +7,33 @@ if ! ps -p $PPID | grep -q java; then
   ZSH_TMUX_AUTOSTART=true
 fi
 
-# Install zplug if missing
-if [ ! -d ~/.zplug ]; then
-  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+if [ ! -d ~/.antigen ]; then
+  curl -L git.io/antigen > .antigen
 fi
 
-source ~/.zplug/init.zsh
-zplug "lib/history", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "plugins/mvn", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/cp", from:oh-my-zsh
-zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/ssh-agent", from:oh-my-zsh
-zplug "plugins/pyenv", from:oh-my-zsh
-zplug "plugins/rbenv", from:oh-my-zsh
-zplug "zsh-users/zsh-syntax-highlighting", from:github
-zplug "zsh-users/zsh-history-substring-search", from:github
-zplug "zsh-users/zsh-completions", from:github
-zplug "zsh-users/zsh-autosuggestions", from:github
-zplug "zplug/zplug", hook-build:'zplug --self-manage'
-zplug "mafredri/zsh-async", from:github
-zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-zplug load
+if [ ! -d ~/.pyenv ]; then
+  curl https://pyenv.run | bash
+fi
+
+source ~/.antigen.zsh
+
+antigen use oh-my-zsh
+antigen bundle "history"
+antigen bundle "tmux"
+antigen bundle "mvn"
+antigen bundle "git"
+antigen bundle "cp"
+antigen bundle "docker"
+antigen bundle "ssh-agent"
+antigen bundle "pyenv"
+antigen bundle "rbenv"
+antigen bundle "zsh-users/zsh-syntax-highlighting"
+antigen bundle "zsh-users/zsh-history-substring-search"
+antigen bundle "zsh-users/zsh-completions"
+antigen bundle "zsh-users/zsh-autosuggestions"
+antigen bundle "mafredri/zsh-async"
+antigen bundle sindresorhus/pure
+antigen apply
 
 bindkey '\eOA' history-substring-search-up
 bindkey '\eOB' history-substring-search-down
@@ -60,7 +64,7 @@ fd() {
 
 # Aliases
 alias s=ssh
-alias umake=ubuntu-make.umake 
+#alias umake=ubuntu-make.umake
 
 # added by travis gem
 [ -f /home/tetien850/.travis/travis.sh ] && source /home/tetien850/.travis/travis.sh
