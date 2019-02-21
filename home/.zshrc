@@ -8,7 +8,7 @@ if ! ps -p $PPID | grep -q java; then
 fi
 
 if [ ! -d ~/.antigen ]; then
-  curl -L git.io/antigen > antigen.zsh
+  curl -L git.io/antigen > ~/antigen.zsh
 fi
 
 if [ ! -d ~/.pyenv ]; then
