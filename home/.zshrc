@@ -15,6 +15,11 @@ if [ ! -d ~/.pyenv ]; then
   curl https://pyenv.run | bash
 fi
 
+if [ ! -d ~/.sdkman ]; then
+  curl -s "https://get.sdkman.io" | bash
+fi
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 source ~/antigen.zsh
 
 antigen use oh-my-zsh
@@ -69,5 +74,3 @@ alias s=ssh
 # added by travis gem
 [ -f /home/tetien850/.travis/travis.sh ] && source /home/tetien850/.travis/travis.sh
 
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
