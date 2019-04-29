@@ -20,6 +20,11 @@ if [ ! -d ~/.sdkman ]; then
 fi
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+export NVM_LAZY_LOAD=true
+export ANDROID_HOME="$HOME/Android/Sdk"
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+export PATH=~/.npm-global/bin:$PATH
+
 source ~/antigen.zsh
 
 antigen use oh-my-zsh
@@ -32,6 +37,9 @@ antigen bundle "docker"
 antigen bundle "ssh-agent"
 antigen bundle "pyenv"
 antigen bundle "rbenv"
+antigen bundle "lukechilds/zsh-nvm"
+antigen bundle "colorize"
+antigen bundle "supercrabtree/k"
 antigen bundle "zsh-users/zsh-syntax-highlighting"
 antigen bundle "zsh-users/zsh-history-substring-search"
 antigen bundle "zsh-users/zsh-completions"
@@ -43,14 +51,9 @@ antigen apply
 bindkey '\eOA' history-substring-search-up
 bindkey '\eOB' history-substring-search-down
 
-
 #Homeshick
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
-
-export ANDROID_HOME="$HOME/Android/Sdk"
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-export PATH=~/.npm-global/bin:$PATH
 
 if [[ -f ~/.fzf.zsh ]]; then
   source ~/.fzf.zsh
@@ -69,8 +72,6 @@ fd() {
 
 # Aliases
 alias s=ssh
-#alias umake=ubuntu-make.umake
 
 # added by travis gem
 [ -f /home/tetien850/.travis/travis.sh ] && source /home/tetien850/.travis/travis.sh
-
