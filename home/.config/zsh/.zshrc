@@ -75,3 +75,5 @@ alias s=ssh
 
 # added by travis gem
 [ -f /home/tetien850/.travis/travis.sh ] && source /home/tetien850/.travis/travis.sh
+
+export PATH="$PATH:$HOME/.rvm/bin"
