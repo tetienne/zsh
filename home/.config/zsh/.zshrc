@@ -1,7 +1,6 @@
-# TMUX
 setopt NO_NOMATCH
-
-#POWERLEVEL9K_MODE='awesome-fontconfig'
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
 #Prevent tmux to start from intellij
 if ! ps -p $PPID | grep -q java; then
   ZSH_TMUX_AUTOSTART=true
@@ -24,11 +23,9 @@ export NVM_LAZY_LOAD=true
 export ANDROID_HOME="$HOME/Android/Sdk"
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH=~/.npm-global/bin:$PATH
-
 source ~/antigen.zsh
 
 antigen use oh-my-zsh
-antigen bundle "history"
 antigen bundle "tmux"
 antigen bundle "mvn"
 antigen bundle "git"
@@ -55,11 +52,11 @@ bindkey '\eOB' history-substring-search-down
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
 
-if [[ -f ~/.fzf.zsh ]]; then
-  source ~/.fzf.zsh
+if [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ]]; then
+  source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 else
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  ~/.fzf/install
+  ~/.fzf/install --xdg --no-bash --all --no-update-rc
 fi
 
 # fd - cd to selected directory
