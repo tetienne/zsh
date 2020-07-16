@@ -29,6 +29,7 @@ antigen use oh-my-zsh
 antigen bundle "tmux"
 antigen bundle "mvn"
 antigen bundle "git"
+antigen bundle "github"
 antigen bundle "cp"
 antigen bundle "docker"
 antigen bundle "ssh-agent"
@@ -73,4 +74,4 @@ alias s=ssh
 # added by travis gem
 [ -f /home/tetien850/.travis/travis.sh ] && source /home/tetien850/.travis/travis.sh
 
-export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$PATH:$HOME/.poetry/bin:$HOME/.rvm/bin"
