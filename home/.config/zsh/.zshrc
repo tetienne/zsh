@@ -14,20 +14,11 @@ if [ ! -d ~/.pyenv ]; then
   curl https://pyenv.run | bash
 fi
 
-if [ ! -d ~/.sdkman ]; then
-  curl -s "https://get.sdkman.io" | bash
-fi
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-
 export NVM_LAZY_LOAD=true
-export ANDROID_HOME="$HOME/Android/Sdk"
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-export PATH=~/.npm-global/bin:$PATH
 source ~/antigen.zsh
 
 antigen use oh-my-zsh
 antigen bundle "tmux"
-antigen bundle "mvn"
 antigen bundle "git"
 antigen bundle "github"
 antigen bundle "cp"
@@ -53,25 +44,24 @@ bindkey '\eOB' history-substring-search-down
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
 
+
+eval "$(gh completion -s zsh)"
+
+# Aliases
+alias s=ssh
+alias fd=fdfind
+alias bat=batcat
+
+# fzf
 if [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ]]; then
   source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 else
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   ~/.fzf/install --xdg --no-bash --all --no-update-rc
 fi
+export FZF_DEFAULT_COMMAND="fdfind --type file --color=always"
+export FZF_DEFAULT_OPTS="--ansi"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# fd - cd to selected directory
-fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
-
-# Aliases
-alias s=ssh
-
-# added by travis gem
-[ -f /home/tetien850/.travis/travis.sh ] && source /home/tetien850/.travis/travis.sh
-
+export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
 export PATH="$PATH:$HOME/.poetry/bin:$HOME/.rvm/bin"
