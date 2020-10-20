@@ -1,10 +1,8 @@
 setopt NO_NOMATCH
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
-#Prevent tmux to start from intellij
-if ! ps -p $PPID | grep -q java; then
-  ZSH_TMUX_AUTOSTART=true
-fi
+
+ZSH_TMUX_AUTOSTART=${ZSH_TMUX_AUTOSTART:-true}
 
 if [ ! -d ~/.antigen ]; then
   curl -L git.io/antigen > ~/antigen.zsh
