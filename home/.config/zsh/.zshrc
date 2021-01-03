@@ -4,11 +4,11 @@ setopt HIST_REDUCE_BLANKS
 
 ZSH_TMUX_AUTOSTART=${ZSH_TMUX_AUTOSTART:-true}
 
-if [ ! -d ~/.antigen ]; then
+if [ ! command -v antigen &> /dev/null ]; then
   curl -L git.io/antigen > ~/antigen.zsh
 fi
 
-if [ ! -d ~/.pyenv ]; then
+if [ ! command -v pyenv &> /dev/null ]; then
   curl https://pyenv.run | bash
 fi
 
