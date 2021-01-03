@@ -51,12 +51,14 @@ alias fd=fdfind
 alias bat=batcat
 
 # fzf
-if [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ]]; then
-  source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
-else
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  ~/.fzf/install --xdg --no-bash --all --no-update-rc
+if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
+  source /usr/share/doc/fzf/examples/key-bindings.zsh
 fi
+
+if [[ -f /usr/share/doc/fzf/examples/completion.zsh ]]; then
+  source /usr/share/doc/fzf/examples/completion.zsh
+fi
+
 export FZF_DEFAULT_COMMAND="fdfind --type file --color=always"
 export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
