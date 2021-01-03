@@ -48,7 +48,6 @@ eval "$(gh completion -s zsh)"
 # Aliases
 alias s=ssh
 alias fd=fdfind
-alias bat=batcat
 
 # fzf
 if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
@@ -63,5 +62,5 @@ export FZF_DEFAULT_COMMAND="fdfind --type file --color=always"
 export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export PATH="$PATH:$HOME/.poetry/bin:$HOME/.rvm/bin"
