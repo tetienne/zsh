@@ -32,7 +32,7 @@ antigen bundle "zsh-users/zsh-history-substring-search"
 antigen bundle "zsh-users/zsh-completions"
 antigen bundle "zsh-users/zsh-autosuggestions"
 antigen bundle "mafredri/zsh-async"
-antigen bundle sindresorhus/pure
+antigen bundle "sindresorhus/pure --branch=main"
 antigen apply
 
 bindkey '\eOA' history-substring-search-up
