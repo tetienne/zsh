@@ -10,3 +10,14 @@ export SAVEHIST=5000
 
 export ZDOTDIR=${XDG_CONFIG_HOME}/zsh
 
+# Python
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$HOME/.poetry/bin:$PATH"
+
+# Golang
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+export EDITOR=vim
+
+. "$HOME/.cargo/env"
