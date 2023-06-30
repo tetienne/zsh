@@ -4,17 +4,22 @@ setopt HIST_REDUCE_BLANKS
 
 #ZSH_TMUX_AUTOSTART=${ZSH_TMUX_AUTOSTART:-true}
 
-source ~/.nix-profile/etc/profile.d/nix.sh
-
 [[ ! -d $HOME/.zgenom ]] && git clone https://github.com/jandamm/zgenom.git "${HOME}/.zgenom"
 source "${HOME}/.zgenom/zgenom.zsh"
 zgenom autoupdate
 
-if ! command -v pyenv &> /dev/null; then
-  curl https://pyenv.run | bash
+
+# Starship
+if ! command -v starship &> /dev/null
+then
+    curl -sS https://starship.rs/install.sh | sh
+fi
+eval "$(starship init zsh)"
+
+if [ ! -d ~/.asdf ]; then
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf
 fi
 
-export NVM_LAZY_LOAD=true
 
 # Run zgenom reset when touching this block
 if ! zgenom saved; then
@@ -30,12 +35,11 @@ if ! zgenom saved; then
   zgenom ohmyzsh plugins/git
   zgenom ohmyzsh plugins/github
   zgenom ohmyzsh plugins/kubectl
+  zgenom ohmyzsh plugins/asdf
   zgenom load lukechilds/zsh-nvm
-  zgenom ohmyzsh plugins/pyenv
-  zgenom ohmyzsh plugins/rbenv
   zgenom ohmyzsh plugins/ripgrep
   zgenom ohmyzsh plugins/ssh-agent
-  zgenom ohmyzsh plugins/tmux
+  # zgenom ohmyzsh plugins/tmux
 
   zgenom load mafredri/zsh-async
   zgenom load zsh-users/zsh-autosuggestions
